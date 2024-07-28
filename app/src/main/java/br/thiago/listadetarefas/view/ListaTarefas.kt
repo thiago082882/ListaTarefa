@@ -1,7 +1,11 @@
 package br.thiago.listadetarefas.view
 
+import TarefaItem
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.BottomAppBarDefaults.containerColor
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -14,13 +18,17 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.thiago.listadetarefas.R
+import br.thiago.listadetarefas.model.Tarefa
 import br.thiago.listadetarefas.ui.theme.Black
 import br.thiago.listadetarefas.ui.theme.PurpleGrey80
 import br.thiago.listadetarefas.ui.theme.White
@@ -29,7 +37,6 @@ import br.thiago.listadetarefas.ui.theme.White
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListaTarefas(navController: NavController) {
-
 
     Scaffold(
         topBar = {
@@ -53,19 +60,33 @@ fun ListaTarefas(navController: NavController) {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                 navController.navigate("salvarTarefa")
+                    navController.navigate("salvarTarefa")
                 },
-                containerColor= PurpleGrey80,
+                containerColor = PurpleGrey80,
                 shape = CircleShape
 
 
             ) {
-                
-                Image(imageVector = ImageVector.vectorResource(id = R.drawable.ic_add), contentDescription = "Icone de salvar tarefa")
+
+                Image(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_add),
+                    contentDescription = "Icone de salvar tarefa"
+                )
 
             }
         }
     ) {
+        val listaTarefa: MutableList<Tarefa> = mutableListOf(
+            Tarefa("Jogar Bola", "fdfsfdf", 0),
+            Tarefa("Tomar Café", "fdfsfdf", 1),
+            Tarefa("Tomar Banho", "fdfsfdf", 2),
+            Tarefa("Jogar Video Game", "fdfsfdf", 3)
+        )
+        LazyColumn(modifier = Modifier.padding(top = 62.dp) ) {
+            itemsIndexed(listaTarefa) { position, _ ->
+                TarefaItem(position,listaTarefa)
 
+            }
+        }
     }
 }

@@ -39,6 +39,7 @@ import br.thiago.listadetarefas.ui.theme.Radio_Button_Yellow_Selected
 import br.thiago.listadetarefas.ui.theme.Radio_Button_red_Disabled
 import br.thiago.listadetarefas.ui.theme.Radio_Button_red_Selected
 import br.thiago.listadetarefas.ui.theme.White
+import com.google.firebase.Firebase
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -159,7 +160,7 @@ fun SalvarTarefa(navController: NavController) {
                 )
             }
             Botao(onClick = {
-
+Firebase
 
             },
                 modifier = Modifier.fillMaxWidth().height(80.dp).padding(20.dp),
