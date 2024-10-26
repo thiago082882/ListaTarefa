@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "244201305552",
-    "project_id": "lista-de-tarefas-compose-a8cae",
-    "storage_bucket": "lista-de-tarefas-compose-a8cae.appspot.com"
+    "project_number": "194181972778",
+    "project_id": "lista-de-tarefa-4c267",
+    "storage_bucket": "lista-de-tarefa-4c267.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:244201305552:android:c1eebdcc22b80f3a5bb5d5",
+        "mobilesdk_app_id": "1:194181972778:android:62200f886122cfcd075453",
         "android_client_info": {
           "package_name": "br.thiago.listadetarefas"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD4MZkqtFm03irt2zOVjJRYWImn1KLLVIU"
+          "current_key": "AIzaSyBuChj_AdCpsI69RD9Fb3Xemj80LdqE4Mw"
         }
       ],
       "services": {
