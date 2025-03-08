@@ -184,7 +184,8 @@ fun SalvarTarefa(navController: NavController) {
                                 tarefaRepo.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
-                                    Constantes.PRIORIDADE_BAIXA
+                                    Constantes.PRIORIDADE_BAIXA,
+                                    false
                                 )
                                 true
                             }
@@ -194,7 +195,8 @@ fun SalvarTarefa(navController: NavController) {
                                 tarefaRepo.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
-                                    Constantes.PRIORIDADE_MEDIA
+                                    Constantes.PRIORIDADE_MEDIA,
+                                    false
                                 )
                                 true
                             }
@@ -202,7 +204,8 @@ fun SalvarTarefa(navController: NavController) {
                                 tarefaRepo.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
-                                    Constantes.PRIORIDADE_ALTA
+                                    Constantes.PRIORIDADE_ALTA,
+                                    false
                                 )
                                 true
                             }
@@ -210,7 +213,8 @@ fun SalvarTarefa(navController: NavController) {
                                 tarefaRepo.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
-                                    Constantes.SEM_PRIORIDADE
+                                    Constantes.SEM_PRIORIDADE,
+                                    false
                                 )
                                 true
                             }
@@ -218,7 +222,8 @@ fun SalvarTarefa(navController: NavController) {
                                 tarefaRepo.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
-                                    Constantes.PRIORIDADE_BAIXA
+                                    Constantes.PRIORIDADE_BAIXA,
+                                    false
                                 )
                                 true
                             }
@@ -226,7 +231,8 @@ fun SalvarTarefa(navController: NavController) {
                                 tarefaRepo.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
-                                    Constantes.PRIORIDADE_MEDIA
+                                    Constantes.PRIORIDADE_MEDIA,
+                                    false
                                 )
                                 true
                             }
@@ -234,7 +240,8 @@ fun SalvarTarefa(navController: NavController) {
                                 tarefaRepo.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
-                                    Constantes.PRIORIDADE_ALTA
+                                    Constantes.PRIORIDADE_ALTA,
+                                    false
                                 )
                                 true
                             }
@@ -242,7 +249,8 @@ fun SalvarTarefa(navController: NavController) {
                                 tarefaRepo.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
-                                    Constantes.SEM_PRIORIDADE
+                                    Constantes.SEM_PRIORIDADE,
+                                    false
                                 )
                                 true
                             }
