@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.thiago.listadetarefas.components.Botao
 import br.thiago.listadetarefas.components.CaixaTexto
@@ -44,6 +45,7 @@ import br.thiago.listadetarefas.ui.theme.Radio_Button_Yellow_Selected
 import br.thiago.listadetarefas.ui.theme.Radio_Button_red_Disabled
 import br.thiago.listadetarefas.ui.theme.Radio_Button_red_Selected
 import br.thiago.listadetarefas.ui.theme.White
+import br.thiago.listadetarefas.viewmodel.TarefaViewModel
 import com.google.firebase.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,11 +53,11 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SalvarTarefa(navController: NavController) {
+fun SalvarTarefa(navController: NavController,viewModel: TarefaViewModel= hiltViewModel()) {
 
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    val tarefaRepo = TarefasRepositorio()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -181,7 +183,7 @@ fun SalvarTarefa(navController: NavController) {
                             }
 
                             tituloTarefa.isNotEmpty() && DescricaoTarefa.isNotEmpty() && prioridadeBaixaTarefa -> {
-                                tarefaRepo.salvarTarefa(
+                                viewModel.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
                                     Constantes.PRIORIDADE_BAIXA,
@@ -192,7 +194,7 @@ fun SalvarTarefa(navController: NavController) {
 
 
                             tituloTarefa.isNotEmpty() && DescricaoTarefa.isNotEmpty() && prioridadeMediaTarefa -> {
-                                tarefaRepo.salvarTarefa(
+                                viewModel.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
                                     Constantes.PRIORIDADE_MEDIA,
@@ -201,7 +203,7 @@ fun SalvarTarefa(navController: NavController) {
                                 true
                             }
                             tituloTarefa.isNotEmpty() && DescricaoTarefa.isNotEmpty() && prioridadeAltaTarefa -> {
-                                tarefaRepo.salvarTarefa(
+                                viewModel.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
                                     Constantes.PRIORIDADE_ALTA,
@@ -210,7 +212,7 @@ fun SalvarTarefa(navController: NavController) {
                                 true
                             }
                             tituloTarefa.isNotEmpty() && DescricaoTarefa.isNotEmpty() && semPrioridadeTarefa -> {
-                                tarefaRepo.salvarTarefa(
+                                viewModel.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
                                     Constantes.SEM_PRIORIDADE,
@@ -219,7 +221,7 @@ fun SalvarTarefa(navController: NavController) {
                                 true
                             }
                             tituloTarefa.isNotEmpty()  && prioridadeBaixaTarefa -> {
-                                tarefaRepo.salvarTarefa(
+                                viewModel.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
                                     Constantes.PRIORIDADE_BAIXA,
@@ -228,7 +230,7 @@ fun SalvarTarefa(navController: NavController) {
                                 true
                             }
                             tituloTarefa.isNotEmpty()  && prioridadeMediaTarefa -> {
-                                tarefaRepo.salvarTarefa(
+                                viewModel.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
                                     Constantes.PRIORIDADE_MEDIA,
@@ -237,7 +239,7 @@ fun SalvarTarefa(navController: NavController) {
                                 true
                             }
                             tituloTarefa.isNotEmpty()  && prioridadeAltaTarefa -> {
-                                tarefaRepo.salvarTarefa(
+                                viewModel.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
                                     Constantes.PRIORIDADE_ALTA,
@@ -246,7 +248,7 @@ fun SalvarTarefa(navController: NavController) {
                                 true
                             }
                             else -> {
-                                tarefaRepo.salvarTarefa(
+                                viewModel.salvarTarefa(
                                     tituloTarefa,
                                     DescricaoTarefa,
                                     Constantes.SEM_PRIORIDADE,

@@ -28,6 +28,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.thiago.listadetarefas.R
 import br.thiago.listadetarefas.model.Tarefa
@@ -35,13 +36,14 @@ import br.thiago.listadetarefas.repository.TarefasRepositorio
 import br.thiago.listadetarefas.ui.theme.Black
 import br.thiago.listadetarefas.ui.theme.PurpleGrey80
 import br.thiago.listadetarefas.ui.theme.White
+import br.thiago.listadetarefas.viewmodel.TarefaViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListaTarefas(navController: NavController) {
+fun ListaTarefas(navController: NavController,viewModel: TarefaViewModel = hiltViewModel()) {
 
-    val tarefaRepository = TarefasRepositorio()
+
     val context = LocalContext.current
 
     Scaffold(
@@ -82,12 +84,13 @@ fun ListaTarefas(navController: NavController) {
             }
         }
     ) {
-        val listaTarefas = tarefaRepository.recuperarTarefas().collectAsState(mutableListOf()).value
+        val listaTarefas = viewModel.recuperarTarefas().collectAsState(mutableListOf()).value
+
         LazyColumn(
             modifier = Modifier.padding(top = 60.dp)
         ) {
             itemsIndexed(listaTarefas) { position, _ ->
-                TarefaItem(position = position, listaTarefa = listaTarefas, context = context,navController=navController)
+                TarefaItem(position = position, listaTarefa = listaTarefas, context = context,navController=navController,viewModel=viewModel)
             }
 
 

@@ -23,14 +23,15 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import br.thiago.listadetarefas.R
 import br.thiago.listadetarefas.model.Tarefa
-import br.thiago.listadetarefas.repository.TarefasRepositorio
 import br.thiago.listadetarefas.ui.theme.Radio_Button_Green_Selected
 import br.thiago.listadetarefas.ui.theme.Radio_Button_Yellow_Selected
 import br.thiago.listadetarefas.ui.theme.Radio_Button_red_Selected
 import br.thiago.listadetarefas.ui.theme.shapeCardPrioridade
+import br.thiago.listadetarefas.viewmodel.TarefaViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -39,7 +40,8 @@ fun TarefaItem(
     position: Int,
     listaTarefa: MutableList<Tarefa>,
     context: Context,
-    navController: NavController
+    navController: NavController,
+    viewModel: TarefaViewModel = hiltViewModel()
 ) {
     val tituloTrefa = listaTarefa[position].tarefa
     val descTrefa = listaTarefa[position].desc
@@ -47,7 +49,6 @@ fun TarefaItem(
     var tarefaConcluida = listaTarefa[position].checkTarefa
 
     val scope = rememberCoroutineScope()
-    val tarefasRepositorio = TarefasRepositorio()
 
     var isChecked by remember { mutableStateOf(tarefaConcluida) }
 
@@ -58,7 +59,7 @@ fun TarefaItem(
             .setMessage("Deseja realmente deletar a tarefa?")
             .setPositiveButton("Sim") { _, _ ->
 
-                tarefasRepositorio.deletarTarefa(tituloTrefa.toString())
+                viewModel.deletarTarefa(tituloTrefa.toString())
                 scope.launch(Dispatchers.Main) {
                     listaTarefa.removeAt(position)
                     navController.navigate("listaTarefas")
@@ -185,9 +186,9 @@ fun TarefaItem(
                     isChecked = it
                     scope.launch(Dispatchers.IO) {
                         if (isChecked!!) {
-                            tarefasRepositorio.atualizarTarefa(tituloTrefa!!, true)
+                            viewModel.atualizarEstadoTarefa(tituloTrefa!!, true)
                         } else {
-                            tarefasRepositorio.atualizarTarefa(tituloTrefa!!, false)
+                            viewModel.atualizarEstadoTarefa(tituloTrefa!!, false)
                         }
                     }
 

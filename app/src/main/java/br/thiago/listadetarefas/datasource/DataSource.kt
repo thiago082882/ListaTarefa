@@ -7,8 +7,9 @@ import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class DataSource {
+class DataSource @Inject constructor() {
 
     private val db = FirebaseFirestore.getInstance()
 
