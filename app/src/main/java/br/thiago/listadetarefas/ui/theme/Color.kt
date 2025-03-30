@@ -19,3 +19,6 @@ val  Radio_Button_Yellow_Disabled = Color(0xFFDDC271)
 val  Radio_Button_Yellow_Selected = Color(0xFFFFC107)
 val  Radio_Button_red_Disabled = Color(0xFFF89089)
 val  Radio_Button_red_Selected = Color(0xFFF44336)
+
+val DARK_PINK = Color(0xFFFC466B)
+val DARK_BLUE = Color(0xFF3F5EFB)
