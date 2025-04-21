@@ -22,3 +22,8 @@ val  Radio_Button_red_Selected = Color(0xFFF44336)
 
 val DARK_PINK = Color(0xFFFC466B)
 val DARK_BLUE = Color(0xFF3F5EFB)
+
+val color1 = Color(0xFF03001e)
+val color2 = Color(0xFF7303c0)
+val color3 = Color(0xFFec38bc)
+val color4 = Color(0xFFfdeff9)

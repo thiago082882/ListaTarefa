@@ -72,6 +72,7 @@ fun Login(navController: NavController) {
             var email by remember { mutableStateOf("") }
             var senha by remember { mutableStateOf("") }
             var visibilidadeSenha by remember { mutableStateOf(false) }
+            var mensagem by remember { mutableStateOf("") }
             var icon = if (visibilidadeSenha)
                 painterResource(id = R.drawable.ic_visibility)
             else
@@ -157,7 +158,7 @@ fun Login(navController: NavController) {
             )
 
             Text(
-                text = "Senha errada!",
+                text = mensagem,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White

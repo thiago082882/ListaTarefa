@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "br.thiago.listadetarefas"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -78,6 +78,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
 
     implementation ("com.google.firebase:firebase-firestore-ktx")
+
+    implementation("com.google.firebase:firebase-auth-ktx")
 
     implementation ("com.google.dagger:hilt-android:2.44")
 

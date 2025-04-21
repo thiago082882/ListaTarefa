@@ -12,6 +12,7 @@ import br.thiago.listadetarefas.view.Cadastro
 import br.thiago.listadetarefas.view.ListaTarefas
 import br.thiago.listadetarefas.view.Login
 import br.thiago.listadetarefas.view.SalvarTarefa
+import br.thiago.listadetarefas.viewmodel.AuthViewModel
 import br.thiago.listadetarefas.viewmodel.TarefaViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +24,7 @@ class MainActivity : ComponentActivity() {
             ListaDeTarefasTheme {
                 val navController = rememberNavController()
                 val tarefaViewModel: TarefaViewModel = hiltViewModel()
+                val authViewModel: AuthViewModel = hiltViewModel()
 
                 NavHost(navController = navController, startDestination = "login") {
                    composable(
@@ -34,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     composable(
                         route = "cadastro"
                     ){
-                        Cadastro(navController)
+                        Cadastro(navController,authViewModel)
                     }
 
 
