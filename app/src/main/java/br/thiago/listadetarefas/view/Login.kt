@@ -1,6 +1,7 @@
 package br.thiago.listadetarefas.view
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -39,17 +43,33 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.thiago.listadetarefas.R
 import br.thiago.listadetarefas.components.BotaoAuth
+import br.thiago.listadetarefas.listener.ListenerAuth
 import br.thiago.listadetarefas.ui.theme.DARK_BLUE
 import br.thiago.listadetarefas.ui.theme.DARK_PINK
 import br.thiago.listadetarefas.ui.theme.PurpleGrey80
 import br.thiago.listadetarefas.ui.theme.ShapeEditText
 import br.thiago.listadetarefas.ui.theme.White
+import br.thiago.listadetarefas.viewmodel.AuthViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Login(navController: NavController) {
+fun Login(
+    navController: NavController,
+    viewModel: AuthViewModel
+) {
 
+    val context = LocalContext.current
+
+    var usuarioLogado = viewModel.verificarUsuarioLogado().collectAsState(initial = false).value
+
+    LaunchedEffect(usuarioLogado) {
+        if (usuarioLogado) {
+            navController.navigate("listaTarefas")
+        }else {
+            usuarioLogado = false
+        }
+    }
     Scaffold(
         modifier = Modifier.background(
             brush = Brush.linearGradient(
@@ -167,27 +187,37 @@ fun Login(navController: NavController) {
             Spacer(modifier = Modifier.padding(10.dp))
 
             BotaoAuth(onClick = {
+                viewModel.logar(email, senha,object : ListenerAuth{
+                    override fun onSuccess(mensagem: String, tela: String) {
+                        Toast.makeText(context, mensagem, Toast.LENGTH_SHORT).show()
+                        navController.navigate(tela)
+                    }
 
-            }, text = "Entrar")
+                    override fun onFail(erro: String) {
+                        mensagem = erro
+                    }
 
-            Spacer(modifier = Modifier.padding(20.dp))
+                })
+                }, text = "Entrar")
 
-            TextButton(onClick = {
-                navController.navigate("cadastro")
+                Spacer(modifier = Modifier.padding(20.dp))
 
-            }) {
-                Text(
-                    text = "Não tem conta? cadastre-se agora!",
-                    color = Color.White,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                TextButton(onClick = {
+                    navController.navigate("cadastro")
+
+                }) {
+                    Text(
+                        text = "Não tem conta? cadastre-se agora!",
+                        color = Color.White,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Spacer(modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 20.dp))
+
+
             }
-            Spacer(modifier = Modifier.padding(0.dp,0.dp,0.dp,20.dp))
-
-
         }
+
+
     }
-
-
-}

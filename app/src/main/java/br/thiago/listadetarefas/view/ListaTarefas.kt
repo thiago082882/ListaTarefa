@@ -2,6 +2,7 @@ package br.thiago.listadetarefas.view
 
 import TarefaItem
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,6 +15,7 @@ import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
@@ -37,6 +39,7 @@ import br.thiago.listadetarefas.ui.theme.Black
 import br.thiago.listadetarefas.ui.theme.PurpleGrey80
 import br.thiago.listadetarefas.ui.theme.White
 import br.thiago.listadetarefas.viewmodel.TarefaViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,6 +48,7 @@ fun ListaTarefas(navController: NavController,viewModel: TarefaViewModel = hiltV
 
 
     val context = LocalContext.current
+    val nomeUsuario = viewModel.perfilUsuario().collectAsState(initial = "").value
 
     Scaffold(
         topBar = {
@@ -60,7 +64,27 @@ fun ListaTarefas(navController: NavController,viewModel: TarefaViewModel = hiltV
                 },
                 colors = TopAppBarDefaults.smallTopAppBarColors(
                     containerColor = PurpleGrey80
-                )
+                ),
+                actions = {
+                    Text(text = nomeUsuario,fontSize = 16.sp, color = White, fontWeight = FontWeight.Medium)
+                    TextButton(onClick = {
+                        val alertDialog = AlertDialog.Builder(context)
+                        alertDialog.setTitle("Atenção")
+                        alertDialog.setMessage("Deseja realmente sair do aplicativo?")
+                        alertDialog.setPositiveButton("Sim") { _, _ ->
+                            FirebaseAuth.getInstance().signOut()
+                            navController.navigate("login")
+                        }
+                        alertDialog.setNegativeButton("Não") { _, _ ->
+                            alertDialog.create().dismiss()
+                        }
+                        alertDialog.show()
+
+                        
+                    }) {
+                     Text(text = "Sair", fontSize = 16.sp, color = White)
+                    }
+                }
             )
 
         },

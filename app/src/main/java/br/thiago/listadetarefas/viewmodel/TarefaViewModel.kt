@@ -18,6 +18,9 @@ class TarefaViewModel @Inject constructor(
 
     private val _todasTarefas = MutableStateFlow<MutableList<Tarefa>>(mutableListOf())
     private  val todasTarefas : StateFlow<MutableList<Tarefa>> = _todasTarefas
+
+    private  val _nome = MutableStateFlow<String>("")
+    private  val nome : StateFlow<String> = _nome
     fun salvarTarefa(tarefa:String,desc:String,prioridade:Int ,checkTarefa:Boolean){
         viewModelScope.launch {
             tarefaRepositorio.salvarTarefa(tarefa,desc,prioridade,checkTarefa)
@@ -43,6 +46,17 @@ class TarefaViewModel @Inject constructor(
         viewModelScope.launch {
             tarefaRepositorio.atualizarTarefa(tarefa,checkTarefa)
         }
+    }
+    fun perfilUsuario():Flow<String>{
+        viewModelScope.launch {
+            tarefaRepositorio.perfilUsuario().collect{
+                _nome.value = it
+
+
+            }
+        }
+        return nome
+
     }
 
 

@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                    composable(
                        route = "login"
                    ){
-                       Login(navController)
+                       Login(navController,authViewModel)
                    }
 
                     composable(

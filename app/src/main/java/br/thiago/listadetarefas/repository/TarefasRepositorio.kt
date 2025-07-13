@@ -24,6 +24,12 @@ class TarefasRepositorio @Inject constructor(
     fun atualizarTarefa(tarefa: String,checkTarefa: Boolean) {
         dataSource.atualizarEstadoTarefa(tarefa, checkTarefa)
     }
+   fun perfilUsuario():Flow<String> {
+       return dataSource.perfilUsuario()
+
+
+   }
+
 
 
 }
